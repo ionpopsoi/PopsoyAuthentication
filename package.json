@@ -1,0 +1,20 @@
+{
+  "name": "popsy-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
+    "sucrase": "^3.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon src/main.js"
+  },
+  "author": "Ion Popsoi",
+  "license": "ISC"
+}
