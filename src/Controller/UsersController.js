@@ -4,6 +4,7 @@ var config = require('../Utils/Config');
 
 import * as UsersServices from '../Services/Users/UsersServices';
 import { VerifyToken } from '../Utils/JWTUtils'; 
+import { Query } from '../Utils/DbConnector';
 
 const router = express.Router();
 
@@ -36,8 +37,9 @@ router.get('/logout', (req,res,next) => {
     res.status(200).send({ auth: false, toke:null});
 })
 
-router.get('/test', VerifyToken, async(req,res,next)=> {
-    res.send("User sucessfull authenticated.");
+router.get('/test', async(req,res,next)=> {
+    var output = await Query('SELECT name FROM test');
+    res.send(output);
 });
 
 module.exports = router;
