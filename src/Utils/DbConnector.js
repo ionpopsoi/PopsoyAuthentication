@@ -13,7 +13,7 @@ export function DbProvider() {
 
 export async function Query(query, params) {
     if(params != null) {
-        var output = await DBConnection.query(query, params);
+        var output = await DBConnection.query(query, [params]);
     } else {
         var output = await DBConnection.query(query);
     }

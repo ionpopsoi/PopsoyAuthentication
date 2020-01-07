@@ -11,8 +11,16 @@ const router = express.Router();
 //? POST
 // Register a new user
 router.post('/register', async(req,res,next)=> {
-    const ss = UsersServices.RegisterUsers();
-    res.send(ss);
+    var input = {
+        Username : req.body.Username,
+        Password : req.body.Password,
+        Email : req.body.Email,
+        ApplicationId : req.body.ApplicationId  
+    };
+
+    const output = UsersServices.RegisterUsers(input);
+
+    res.status(200).json(output);
 });
 
 //? POST
