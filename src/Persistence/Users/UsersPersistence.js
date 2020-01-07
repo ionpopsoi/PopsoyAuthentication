@@ -1,6 +1,8 @@
-import { Query } from '../../Utils/DbConnector';
+import { DbProvider, Query } from '../../Utils/DbConnector';
+
+var DB = DbProvider();
 
 export async function StoreUserData(UserData) {
-    var output = Query("INSERT INTO CORE_Clients (Id,ClienteId,Username,Password,Email,ApplicationId) VALUES (?)", UserData).catch();
+    var output = await DB.query("INSERT INTO CORE_Clients SET ?", UserData);
     return output;
 }

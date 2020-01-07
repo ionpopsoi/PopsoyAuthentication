@@ -18,7 +18,7 @@ router.post('/register', async(req,res,next)=> {
         ApplicationId : req.body.ApplicationId  
     };
 
-    const output = UsersServices.RegisterUsers(input);
+    const output = await UsersServices.RegisterUsers(input);
 
     res.status(200).json(output);
 });

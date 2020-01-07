@@ -8,8 +8,8 @@ export async function RegisterUsers(Input){
 
     var userPwd = await EncryptPWd(Input.Password);
     var UserData = {
-        Id: 1,
-        ClienteId : 1000,
+        Id: 2,
+        ClienteId : 1001,
         Username : Input.Username,
         Password : userPwd,
         Email : Input.Email,
@@ -18,7 +18,7 @@ export async function RegisterUsers(Input){
 
     var storage = UsersPersistence.StoreUserData(UserData);
     
-
+    return storage;
 }
 
 async function EncryptPWd(Pwd){
