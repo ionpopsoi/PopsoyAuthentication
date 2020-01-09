@@ -11,6 +11,7 @@ const router = express.Router();
 //? POST
 // Register a new user
 router.post('/register', async(req,res,next)=> {
+
     var input = {
         Username : req.body.Username,
         Password : req.body.Password,
@@ -46,7 +47,7 @@ router.get('/logout', (req,res,next) => {
 })
 
 router.get('/test', async(req,res,next)=> {
-    var output = await Query('SELECT name FROM test');
+    var output = await UsersServices.GetUserData("teste");
     res.send(output);
 });
 

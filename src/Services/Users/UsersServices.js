@@ -7,6 +7,7 @@ const saltRounds = 1;
 export async function RegisterUsers(Input){
 
     var userPwd = await EncryptPWd(Input.Password);
+    
     var UserData = {
         Id: 2,
         ClienteId : 1001,
@@ -14,20 +15,23 @@ export async function RegisterUsers(Input){
         Password : userPwd,
         Email : Input.Email,
         ApplicationId : Input.ApplicationId
-    }
+    };
 
     var storage = UsersPersistence.StoreUserData(UserData);
     
     return storage;
 }
 
-async function EncryptPWd(Pwd){
-    // Encrypt password
-    var ss = await bcrypt.hashSync(Pwd, saltRounds);
-
-    return ss;
+//Get User Data
+export async function GetUserData(username, clienteId) {
+    var input = {
+        Username : username
+    };
+    
+    return await UsersPersistence.GetUserData(input);
 }
 
-export async function GetUserData(username, clienteId) {
-
+// Encrypt password
+async function EncryptPWd(Pwd){
+    return  await bcrypt.hashSync(Pwd, saltRounds);
 }
