@@ -7,6 +7,11 @@ export async function StoreUserData(UserData) {
     return output;
 }
 
+export async function DeleteUserToken(input) {
+    var output = await DB.query("DELETE Token FROM CORE_Clientes WHERE (?)");
+    return output;
+}
+
 export async function GetUserData(UserData){
     var output = await DB.query("SELECT * FROM CORE_Clients WHERE (?)", UserData);
     if(output[0].lenght > 0){

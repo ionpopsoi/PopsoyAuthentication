@@ -31,6 +31,16 @@ export async function GetUserData(username, clienteId) {
     return await UsersPersistence.GetUserData(input);
 }
 
+//Delete user token
+export async function DeleteUserToken(Username, Token){
+    var input = {
+        Username: Username,
+        Token: Token
+    };
+    
+    return await UsersPersistence.DeleteUserToken(input);
+}
+
 // Encrypt password
 async function EncryptPWd(Pwd){
     return  await bcrypt.hashSync(Pwd, saltRounds);

@@ -43,11 +43,17 @@ router.post('/login', async(req,res,next) => {
         //SEND JWT
         if(passwordMatch) {
             var payload = userData[0];
+            
             var token = jwt.sign( {payload }, config.secret, {
                 expiresIn: 600
             });
+
+            //Guardar o TOKEN na BASE DE DADOS
+
             res.status(200).send({ auth: true, token: token });
         } else {
+            //SE TIVER TOKEN NA DB APAGA
+            
             res.status(500).send('Invalid login');
         }
     }
@@ -58,6 +64,8 @@ router.post('/login', async(req,res,next) => {
 // Remover token do utilizador
 //* TODO? Delete token from database
 router.get('/logout', (req,res,next) => {
+    //DELETE TOKEN DA DB
+
     res.status(200).send({ auth: false, toke:null});
 })
 
