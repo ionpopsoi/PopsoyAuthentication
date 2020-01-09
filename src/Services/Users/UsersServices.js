@@ -9,8 +9,8 @@ export async function RegisterUsers(Input){
     var userPwd = await EncryptPWd(Input.Password);
     
     var UserData = {
-        Id: 2,
-        ClienteId : 1001,
+        Id: 4,
+        ClienteId : 1002,
         Username : Input.Username,
         Password : userPwd,
         Email : Input.Email,

@@ -1,5 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
 var config = require('../Utils/Config');
 
 import * as UsersServices from '../Services/Users/UsersServices';
@@ -28,15 +30,28 @@ router.post('/register', async(req,res,next)=> {
 // Login users
 //* TODO? Migrate this layer to UsersServices.js- 
 router.post('/login', async(req,res,next) => {
-    if(req.body.user === 'admin' && req.body.pwd === '123') {
-        const id = 1; //esse id viria do banco de dados
-        var token = jwt.sign({ id }, config.secret, {
-            expiresIn: 600 // 10min
-        });
-        res.status(200).send({ auth: true, token: token });
+    //GET USER DATA
+    var userData = await UsersServices.GetUserData(req.body.user);
+    
+    //VERIFICAR SE ESTE USER TEM CONTA NA APPLICATIONID
+    if(req.body.ApplicationId != userData[0].ApplicationId){
+        res.status(500).send({ auth:false, message: "Invalid login."})
     } else {
-        res.status(500).send('Login inválido!');
+        //COMPARE PASSWORD
+        var passwordMatch = await bcrypt.compareSync(req.body.pwd, userData[0].Password);
+    
+        //SEND JWT
+        if(passwordMatch) {
+            var payload = userData[0];
+            var token = jwt.sign( {payload }, config.secret, {
+                expiresIn: 600
+            });
+            res.status(200).send({ auth: true, token: token });
+        } else {
+            res.status(500).send('Invalid login');
+        }
     }
+
 });
 
 //? GET
