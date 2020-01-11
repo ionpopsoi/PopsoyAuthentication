@@ -63,7 +63,7 @@ router.post('/login', async(req,res,next) => {
 //? GET
 // Remover token do utilizador
 //* TODO? Delete token from database
-router.get('/logout/:Username/:Token', (req,res,next) => {
+router.get('/logout/:Username/:Token', async (req,res,next) => {
     //DELETE TOKEN DA DB
     var username = req.param.Username;
     var token = req.param.Token;

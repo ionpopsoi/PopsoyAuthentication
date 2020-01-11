@@ -9,8 +9,7 @@ export async function RegisterUsers(Input){
     var userPwd = await EncryptPWd(Input.Password);
     
     var UserData = {
-        Id: 4,
-        ClienteId : 1002,
+        ClientId : await GenerateClientId(),
         Username : Input.Username,
         Password : userPwd,
         Email : Input.Email,
@@ -44,4 +43,25 @@ export async function DeleteUserToken(Username, Token){
 // Encrypt password
 async function EncryptPWd(Pwd){
     return  await bcrypt.hashSync(Pwd, saltRounds);
+}
+
+async function GenerateClientId() {
+    var generatedClientId = await GenerateNumberClienteId();
+    var input = {
+        ClientId: generatedClientId
+    };
+    var result = await UsersPersistence.GetUserData(input);
+    while(result.lenght > 0){
+        var generatedClientId = await GenerateNumberClienteId();
+        var input = {
+            ClienteId: generatedClientId
+        };
+        var result = await UsersPersistence.GetUserData(input);
+        generatedClientId = await GenerateNumberClienteId();
+    }
+    return generatedClientId;
+}
+
+async function GenerateNumberClienteId(){
+    return Math.floor(Math.random() * (2000 - 1000) + 1000);
 }
