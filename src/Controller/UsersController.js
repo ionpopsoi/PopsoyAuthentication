@@ -33,8 +33,8 @@ router.post('/login', async(req,res,next) => {
     //GET USER DATA
     var userData = await UsersServices.GetUserData(req.body.user);
     
-    if(userData == null) {
-        return status(500).send({auth:false, message: "Invalid login."})
+    if(userData.length == 0) {
+        return res.status(500).send({auth:false, message: "Invalid login."})
     }
     
     //VERIFICAR SE ESTE USER TEM CONTA NA APPLICATIONID
