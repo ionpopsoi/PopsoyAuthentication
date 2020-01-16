@@ -33,7 +33,7 @@ router.post('/login', async(req,res,next) => {
     //GET USER DATA
     var userData = await UsersServices.GetUserData(req.body.user);
     
-    if(userData.lenght > 0) {
+    if(userData == null) {
         return status(500).send({auth:false, message: "Invalid login."})
     }
     
