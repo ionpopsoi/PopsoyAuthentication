@@ -33,8 +33,7 @@ export async function GetUserData(username, clienteId) {
 //Delete user token
 export async function DeleteUserToken(Username, Token){
     var input = {
-        Username: Username,
-        Token: Token
+        Username: Username
     };
     
     return await UsersPersistence.DeleteUserToken(input);

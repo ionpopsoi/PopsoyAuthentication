@@ -33,6 +33,10 @@ router.post('/login', async(req,res,next) => {
     //GET USER DATA
     var userData = await UsersServices.GetUserData(req.body.user);
     
+    if(userData.lenght > 0) {
+        return status(500).send({auth:false, message: "Invalid login."})
+    }
+    
     //VERIFICAR SE ESTE USER TEM CONTA NA APPLICATIONID
     if(req.body.ApplicationId != userData[0].ApplicationId){
         res.status(500).send({ auth:false, message: "Invalid login."})
@@ -54,24 +58,28 @@ router.post('/login', async(req,res,next) => {
         } else {
             //SE TIVER TOKEN NA DB APAGA
             
-            res.status(500).send('Invalid login');
+            res.status(500).send({auth:false, message: "Invalid login."});
         }
     }
 
 });
 
 //? GET
-// Remover token do utilizador
-//* TODO? Delete token from database
-router.get('/logout/:Username/:Token', async (req,res,next) => {
+//  Remover token do utilizador
+router.get('/logout', async (req,res,next) => {
     //DELETE TOKEN DA DB
-    var username = req.param.Username;
-    var token = req.param.Token;
+    var username = req.headers["Username"];
 
-    await UsersServices.DeleteUserToken(username, token);
+    await UsersServices.DeleteUserToken(username);
 
     res.status(200).send({ auth: false, toke:null});
 })
+
+//? GET
+//  Verificar se o utilizador ainda esta autenticado
+router.get('/validate', VerifyToken, async (req,res,next)=>{
+    res.status(200).send({ auth: true });
+});
 
 router.get('/test', async(req,res,next)=> {
     var output = await UsersServices.GetUserData("teste");
