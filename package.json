@@ -15,7 +15,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "nodemon src/main.js"
+    "dev": "nodemon src/main.js",
+    "prod":"node --inspect -r sucrase/register src/main.js"
   },
   "author": "Ion Popsoi",
   "license": "ISC"
