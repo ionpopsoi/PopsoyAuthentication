@@ -11,12 +11,13 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
-    "sucrase": "^3.12.0"
+    "sucrase": "^3.12.0",
+    "transcationservice": "*"
   },
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon src/main.js",
-    "prod":"node --inspect -r sucrase/register src/main.js"
+    "prod": "node --inspect -r sucrase/register src/main.js"
   },
   "author": "Ion Popsoi",
   "license": "ISC"

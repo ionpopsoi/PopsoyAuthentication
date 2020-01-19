@@ -6,9 +6,12 @@ var config = require('../Utils/Config');
 
 import * as UsersServices from '../Services/Users/UsersServices';
 import { VerifyToken } from '../Utils/JWTUtils'; 
-import { Query } from '../Utils/DbConnector';
+
+import { Transaction } from '../Utils/Transactions';
 
 const router = express.Router();
+
+router.use(Transaction);
 
 //? POST
 // Register a new user
@@ -83,7 +86,7 @@ router.get('/validate', VerifyToken, async (req,res,next)=>{
 
 router.get('/test', async(req,res,next)=> {
     var output = await UsersServices.GetUserData("teste");
-    res.send(output);
+    res.send("ok");
 });
 
 module.exports = router;
