@@ -4,6 +4,7 @@ export interface ResponseWrapper {
 }
 interface header{
     auth: boolean,
+    status: number,
     timestamp?: number,
 }
 

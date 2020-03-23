@@ -4,12 +4,20 @@ import UsersPersistence from '@persistence/UsersPersistences'
 
 import { Users } from '@models/Users/UsersModel'
 
+import Operation from '@utils/Operation';
 
 class UsersServices {
     
     public async RegisterNewUser(request: any) : Promise<any> {
+        var output = new Operation();
+
         var userData = request.body;
-    
+        
+        if(request.body.Email == "teste"){
+            output.AddError("eroro1.");
+            output.AddError("Email already been used.");
+            return output;
+        }
         //Verificar se os dados estão corrector && encriptar password
         var userPWDEncrypted = await this.EncryptPWD(userData.Password);
     
