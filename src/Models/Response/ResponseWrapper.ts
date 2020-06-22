@@ -1,6 +1,6 @@
 export interface ResponseWrapper {
     header : header,
-    data: data
+    data: any
 }
 interface header{
     auth: boolean,

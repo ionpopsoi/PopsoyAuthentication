@@ -20,9 +20,8 @@ class ResponseWrapperService {
                 status: newStatus,
                 timestamp: Date.now()
             },
-            data: {
-                Body
-            }
+            data: Body
+            
         };
         return responseMessage
     }

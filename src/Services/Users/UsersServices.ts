@@ -13,9 +13,8 @@ class UsersServices {
 
         var userData = request.body;
         
-        if(request.body.Email == "teste"){
-            output.AddError("eroro1.");
-            output.AddError("Email already been used.");
+        if(request.body.Email == null){
+            output.AddError("Email needs to have value.");
             return output;
         }
         //Verificar se os dados estão corrector && encriptar password

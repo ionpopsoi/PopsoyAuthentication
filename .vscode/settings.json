@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "Popsoy",
+            "dialect": "MySQL",
+            "name": "DEV",
+            "password": "Qwerty123m!",
+            "port": 3306,
+            "server": "142.93.38.16",
+            "username": "ionpopsoi"
+        }
+    ]
+}

@@ -8,14 +8,14 @@ class UsersPersistence{
     public internalDB = new DBConnector();
 
     public async RegisterUser(UserData: Users) : Promise<boolean> {    
-        var output = await this.internalDB.Connection().query("INSERT INTO CORE.Clients SET ?", UserData);
-        return output;
+        var output = await this.internalDB.Connection().query("INSERT INTO CORE.Clients SET ?", UserData, function(error, results) {
+            if (error) throw error;
+        });
+        return output[0];
     }
 
     public async GetUserData(Username: string){
         var output = await this.internalDB.Connection().query("SELECT * FROM CORE.Clients Where (?)", Username);
-
-
 
         return output[0];
     }
